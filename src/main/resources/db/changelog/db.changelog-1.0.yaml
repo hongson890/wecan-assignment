@@ -11,14 +11,8 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: account_pkey
                   name: id
-                  type: bigint
+                  type: int
               - column:
-                  name: email
+                  name: code
                   type: VARCHAR(255)
-              - column:
-                  name: password
-                  type: VARCHAR(255)
-              - column:
-                  name: role
-                  type: VARCHAR(255)
-            tableName: account
+            tableName: voucher

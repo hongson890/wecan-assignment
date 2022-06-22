@@ -1,11 +1,11 @@
 package com.wecan.assignment.repositories;
-import com.wecan.assignment.model.Product;
+import com.wecan.assignment.model.Voucher;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface ProductRepository extends CrudRepository<Product, Integer> {
+public interface ProductRepository extends CrudRepository<Voucher, Integer> {
 
 //    Page<Product> findAllByNameContains(String name, Pageable pageable);
 //    Page<Product> findAll(Pageable pageable);
