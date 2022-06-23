@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -24,5 +25,8 @@ public class VoucherDTO {
     private boolean active;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
-
+    private String voucherContent;
+    private String redemptionValue;
+    private Integer redemptionTimes;
+    private boolean status;
 }
