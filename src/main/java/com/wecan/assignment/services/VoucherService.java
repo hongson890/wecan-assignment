@@ -8,5 +8,8 @@ import java.util.List;
 
 public interface VoucherService {
     List<VoucherDTO> getAllVouchers();
-    ResponseEntity createOrUpdateVoucher(VoucherRequestDTO voucherRequestDTO, boolean isUpdated);
+    ResponseEntity createVoucher(VoucherRequestDTO voucherRequestDTO);
+    ResponseEntity updateVoucher(Integer id, VoucherRequestDTO voucherRequestDTO);
+    ResponseEntity deleteVoucher(Integer id);
+    VoucherDTO getVoucherById(Integer id);
 }
