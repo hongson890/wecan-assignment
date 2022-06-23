@@ -17,5 +17,4 @@ public class VoucherMapper {
         return modelMapper.map(voucherRequestDTO, Voucher.class);
     }
 
-
 }
