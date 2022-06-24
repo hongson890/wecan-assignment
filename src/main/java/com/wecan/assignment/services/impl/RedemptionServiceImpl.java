@@ -51,6 +51,7 @@ public class RedemptionServiceImpl implements RedemptionService {
 
             // update redemptionTimes
             voucher.setRedemptionTimes(voucher.getRedemptionTimes() + 1);
+            voucher.setUpdatedOn(LocalDateTime.now());
             voucherRepository.save(voucher);
 
             return ResponseEntity.ok(VoucherMapper.toDTO(voucher));

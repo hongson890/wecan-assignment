@@ -27,7 +27,9 @@
             <column name="created_on" type="timestamptz"/>
             <column name="updated_on" type="timestamptz"/>
             <column name="active" type="boolean" defaultValue="true"/>
-            <column name="status" type="boolean" defaultValue="true"/>
+            <column name="version" type="INTEGER" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 

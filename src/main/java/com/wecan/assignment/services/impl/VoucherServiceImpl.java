@@ -6,6 +6,7 @@ import com.wecan.assignment.exception.VoucherBadParamsException;
 import com.wecan.assignment.exception.VoucherNotfoundException;
 import com.wecan.assignment.mapper.VoucherMapper;
 import com.wecan.assignment.model.Voucher;
+import com.wecan.assignment.repositories.RedemptionRepository;
 import com.wecan.assignment.repositories.VoucherRepository;
 import com.wecan.assignment.services.VoucherService;
 import org.slf4j.Logger;
@@ -28,11 +29,13 @@ public class VoucherServiceImpl implements VoucherService {
 
     private VoucherRepository voucherRepository;
 
-    public VoucherServiceImpl(VoucherRepository voucherRepository) {
-        this.voucherRepository = voucherRepository;
-    }
+    private RedemptionRepository redemptionRepository;
 
     @Autowired
+    public VoucherServiceImpl(VoucherRepository voucherRepository, RedemptionRepository redemptionRepository) {
+        this.voucherRepository = voucherRepository;
+        this.redemptionRepository = redemptionRepository;
+    }
 
     @Override
     public List<VoucherDTO> getAllVouchers() {
@@ -44,10 +47,12 @@ public class VoucherServiceImpl implements VoucherService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity createVoucher(final VoucherRequestDTO voucherRequestDTO) {
         logger.info("createVoucher: {}", voucherRequestDTO);
         try {
             Voucher voucher = VoucherMapper.toEntity(voucherRequestDTO);
+            voucher.setRedemptionTimes(0);
             voucher.setCreatedOn(LocalDateTime.now());
             voucher.setUpdatedOn(LocalDateTime.now());
             Voucher v = voucherRepository.save(voucher);
@@ -81,9 +86,11 @@ public class VoucherServiceImpl implements VoucherService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity deleteVoucher(Integer id) {
         logger.info("deleteVoucher: id {}", id);
         try {
+            redemptionRepository.deleteAllRedemptionFromAVoucher(id);
             voucherRepository.deleteById(id);
             return ResponseEntity.ok("Deleted the voucher successfully");
         } catch (EmptyResultDataAccessException e) {
