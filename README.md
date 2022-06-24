@@ -175,12 +175,12 @@ mvn test
 ./mvnw clean package 
 ```
 
->   Start project from source code
+>   Start project from source code if you already setup a Postgres DB
 ```
 mvn spring:boot-run
 ```
 
->   Start by docker
+>   Start by docker if you haven't setuped Postgres DB yet.
 ```
 # Build Docker Image
 docker build -t sonny-wecan-assignment .
