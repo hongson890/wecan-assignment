@@ -103,6 +103,9 @@ Request Body:
 | Path Variable     | Type      | Description                            |
 | :-----------------| :-------  | :--------------------------------------|
 | `voucherId`       | `Integer` | **Required**. ID of voucher to redeem  |
+# Voucher Check Availability Flow
+
+![ScreenShot](https://live.staticflickr.com/65535/52168568632_015a1d25c6_b.jpg)
 
 # Installation & Starting
 
@@ -116,16 +119,76 @@ Request Body:
 mvn spring:boot-run
 ```
 
-Start by docker
+>   Start by docker
 ```
-docker build -t justin-tu:latest .
-docker run -d -p 8888:8080 justin-tu:latest
+docker-compose up
 ```
-## Deployment
+# Demo
 
-To deploy this project run
 
-```bash
-  npm run deploy
+>   API Document
+```
+http://localhost:8000/swagger-ui.html#/
+
 ```
 
+![ScreenShot](https://live.staticflickr.com/65535/52169588823_8efe2ddfd3_k.jpg)
+
+
+1. _To get all vouchers_
+
+
+```
+curl --location --request GET 'http://localhost:8000/api/vouchers'
+```
+
+2. _To generate a voucher_
+
+```
+curl --location --request POST 'http://localhost:8000/api/vouchers' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "test voucher",
+    "code": "BETA",
+    "redemptionType": "X_TIMES",
+    "redemptionValue": "10",
+    "voucherType": "FIXED_AMOUNT",
+    "voucherContent": "100",
+    "active": true
+}'
+```
+
+3. _To update existed voucher_
+
+```
+curl --location --request PUT 'http://localhost:8000/api/vouchers/1' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "test voucher",
+    "code": "BETA",
+    "redemptionType": "X_TIMES",
+    "redemptionValue": "2",
+    "voucherType": "FIXED_AMOUNT",
+    "voucherContent": "100",
+    "active": true
+}'
+```
+
+
+4. _To delete a voucher_
+```
+curl --location --request DELETE 'http://localhost:8000/api/vouchers/1'
+```
+
+5. _To get a voucher by Id_
+
+```
+curl --location --request GET 'http://localhost:8000/api/vouchers/1'
+```
+
+
+6. _To redeem a voucher_
+
+```
+    curl --location --request POST 'http://localhost:8000/api/redemption/1'
+```
