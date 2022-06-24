@@ -20,6 +20,62 @@ A brief description of what this project does and who it's for
 
 **Database:** PostgresSQL
 
+# Source Directory
+    src
+    ├── main
+    │   ├── java
+    │   │   └── com
+    │   │       └── wecan
+    │   │           └── assignment
+    │   │               ├── common
+    │   │               │   ├── RedemptionType.java
+    │   │               │   └── VoucherType.java
+    │   │               ├── controllers
+    │   │               │   ├── api
+    │   │               │   │   ├── RedemptionController.java
+    │   │               │   │   └── VoucherController.java
+    │   │               │   └── dto
+    │   │               │       ├── VoucherDTO.java
+    │   │               │       └── VoucherRequestDTO.java
+    │   │               ├── exception
+    │   │               │   ├── VoucherBadParamsException.java
+    │   │               │   ├── VoucherExceptionControllerAdvice.java
+    │   │               │   ├── VoucherExistedException.java
+    │   │               │   └── VoucherNotfoundException.java
+    │   │               ├── mapper
+    │   │               │   └── VoucherMapper.java
+    │   │               ├── model
+    │   │               │   ├── Redemption.java
+    │   │               │   └── Voucher.java
+    │   │               ├── repositories
+    │   │               │   ├── RedemptionRepository.java
+    │   │               │   └── VoucherRepository.java
+    │   │               ├── services
+    │   │               │   ├── impl
+    │   │               │   │   ├── RedemptionServiceImpl.java
+    │   │               │   │   └── VoucherServiceImpl.java
+    │   │               │   ├── RedemptionService.java
+    │   │               │   └── VoucherService.java
+    │   │               ├── utils
+    │   │               │   ├── DateUtils.java
+    │   │               │   └── VoucherUtil.java
+    │   │               └── AssignmentApplication.java
+    │   └── resources
+    │       ├── db
+    │       │   └── changelog
+    │       │       ├── db.changelog-1.0.xml
+    │       │       ├── db.changelog-1.1.xml
+    │       │       └── db.changelog-master.yaml
+    │       ├── application.yml
+    │       └── logback.xml
+    └── test
+        └── java
+            └── com
+                └── wecan
+                    └── assignment
+                        └── services
+                            ├── RedemptionServiceImplTest.java
+                            └── VoucherServiceImplTest.java
 
 
 # API Reference
@@ -108,6 +164,12 @@ Request Body:
 ![ScreenShot](https://live.staticflickr.com/65535/52168568632_015a1d25c6_b.jpg)
 
 # Installation & Starting
+
+>   Run Unit Test
+```
+mvn test
+```
+ 
 
 > Packaging
 ```
