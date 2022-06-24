@@ -8,14 +8,14 @@ import org.slf4j.LoggerFactory;
 
 public class VoucherUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(RedemptionServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(VoucherUtil.class);
     /*
      *       THIS FUNCTION USED TO CHECK AVAILABILITY OF A VOUCHER
      *      - Return TRUE if:
      *          1. RedemptionType = SINGLE && redemptionTimes = 0
      *          2. RedemptionType = MULTIPLE
      *          3. RedemptionType = X_TIME && redemptionTimes < Number(redemptionValue)
-     *          4. RedemptionType = BEFORE_CERTAIN_POINT_OF_TIME && Date.now() > Date(redemptionValue)
+     *          4. RedemptionType = BEFORE_CERTAIN_POINT_OF_TIME && Date.now() before Date(redemptionValue)
      *      - Otherwise return FALSE
      */
 
@@ -29,8 +29,8 @@ public class VoucherUtil {
                 case MULTIPLE:
                     return true;
                 case X_TIMES:
-                    Integer redemptionV = Integer.parseInt(redemptionValue);
-                    return redemptionTimes != null ? redemptionTimes < redemptionV : false;
+                    Integer redemptionIntValue = Integer.parseInt(redemptionValue);
+                    return redemptionTimes != null ? redemptionTimes < redemptionIntValue : false;
                 case BEFORE_CERTAIN_POINT_OF_TIME:
                     DateTime dt = DateTime.parse(redemptionValue);
                     return DateTime.now().isBefore(dt);

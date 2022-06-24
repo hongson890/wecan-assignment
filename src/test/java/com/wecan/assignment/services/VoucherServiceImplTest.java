@@ -7,6 +7,7 @@ import com.wecan.assignment.controllers.dto.VoucherRequestDTO;
 import com.wecan.assignment.exception.VoucherBadParamsException;
 import com.wecan.assignment.mapper.VoucherMapper;
 import com.wecan.assignment.model.Voucher;
+import com.wecan.assignment.repositories.RedemptionRepository;
 import com.wecan.assignment.repositories.VoucherRepository;
 import com.wecan.assignment.services.impl.VoucherServiceImpl;
 import org.junit.Assert;
@@ -31,6 +32,9 @@ public class VoucherServiceImplTest {
 
     @Mock
     VoucherRepository voucherRepository;
+
+    @Mock
+    RedemptionRepository redemptionRepository;
 
     @InjectMocks
     VoucherServiceImpl voucherServiceImpl;
