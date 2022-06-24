@@ -1,7 +1,7 @@
 
 # Wecan Voucher Assignment - Sonny
 
-In this assignemnt, I'm going build a Java Spring Boot Application from scratch, which contains some following features:
+In this assignment, I'm going build a Java Spring Boot Application from scratch, which contains some following features:
 
 # Features
 
