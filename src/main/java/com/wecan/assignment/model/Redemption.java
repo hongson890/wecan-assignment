@@ -1,4 +1,4 @@
-package com.wecan.assignment.controllers.dto;
+package com.wecan.assignment.model;
 
 import com.wecan.assignment.common.RedemptionType;
 import com.wecan.assignment.common.VoucherType;
@@ -9,24 +9,27 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
-@Data
+@Entity
+@Table(name = "redemption")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class VoucherDTO {
+@Data
+public class Redemption {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String code;
-    private String name;
+
+    @ManyToOne
+    @JoinColumn(name="voucher_id", nullable=false)
+    private Voucher voucher;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private RedemptionType redemptionType;
-    private VoucherType voucherType;
-    private boolean active;
+
     private LocalDateTime createdOn;
-    private LocalDateTime updatedOn;
-    private String voucherContent;
-    private String redemptionValue;
-    private Integer redemptionTimes;
-    private boolean status;
+
 }

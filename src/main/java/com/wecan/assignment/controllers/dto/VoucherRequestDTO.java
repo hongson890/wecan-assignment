@@ -17,4 +17,7 @@ public class VoucherRequestDTO {
     private RedemptionType redemptionType;
     private VoucherType voucherType;
     private boolean active;
+    private String voucherContent;
+    private String redemptionValue;
+    private Integer redemptionTimes;
 }

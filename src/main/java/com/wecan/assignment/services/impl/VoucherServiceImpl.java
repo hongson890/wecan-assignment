@@ -21,7 +21,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -72,11 +71,7 @@ public class VoucherServiceImpl implements VoucherService {
         try {
             Voucher voucherDb = voucherRepository.getById(id);
             voucherDb.setUpdatedOn(LocalDateTime.now());
-            voucherDb.setActive(voucherRequestDTO.isActive());
-            voucherDb.setVoucherType(voucherRequestDTO.getVoucherType());
-            voucherDb.setRedemptionType(voucherRequestDTO.getRedemptionType());
-            voucherDb.setCode(voucherRequestDTO.getCode());
-            voucherDb.setName(voucherRequestDTO.getName());
+            voucherDb = voucherMapper.toEntity(voucherDb, voucherRequestDTO);
             voucherRepository.save(voucherDb);
             return ResponseEntity.ok(voucherMapper.toDTO(voucherDb));
         } catch (DataIntegrityViolationException e) {
