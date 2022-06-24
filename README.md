@@ -1,8 +1,7 @@
 
 # Wecan Voucher Assignment - Sonny
 
-A brief description of what this project does and who it's for
-
+In this assignemnt, I'm going build a Java Spring Boot Application from scratch, which contains some following features:
 
 # Features
 
