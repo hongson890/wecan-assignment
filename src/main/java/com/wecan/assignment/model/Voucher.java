@@ -2,6 +2,7 @@ package com.wecan.assignment.model;
 
 import com.wecan.assignment.common.RedemptionType;
 import com.wecan.assignment.common.VoucherType;
+import io.swagger.models.auth.In;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -54,6 +55,9 @@ public class Voucher {
     // Used to enable or disable a voucher regardless of the voucher status being available or not
     // Note: only active vouchers can be redeemed
     private boolean active;
+
+    @Version
+    private Integer version;
 
     private LocalDateTime createdOn;
 

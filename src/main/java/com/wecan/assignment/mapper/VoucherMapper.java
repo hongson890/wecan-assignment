@@ -12,8 +12,7 @@ public class VoucherMapper {
     public static VoucherDTO toDTO(Voucher voucher) {
         ModelMapper modelMapper = new ModelMapper();
         VoucherDTO voucherDTO = modelMapper.map(voucher, VoucherDTO.class);
-        voucherDTO.setAvailability(VoucherUtil.isVoucherAvailability
-                (voucher.getRedemptionType(), voucher.getRedemptionValue(), voucher.getRedemptionTimes()));
+        voucherDTO.setAvailability(VoucherUtil.isVoucherAvailability(voucher.getRedemptionType(), voucher.getRedemptionValue(), voucher.getRedemptionTimes()));
         return voucherDTO;
     }
 
@@ -30,7 +29,9 @@ public class VoucherMapper {
         voucherDb.setName(voucherRequestDTO.getName());
         voucherDb.setVoucherContent(voucherRequestDTO.getVoucherContent());
         voucherDb.setRedemptionValue(voucherRequestDTO.getRedemptionValue());
-        voucherDb.setRedemptionTimes(voucherRequestDTO.getRedemptionTimes());
+        if (voucherRequestDTO.getRedemptionTimes() != null) {
+            voucherDb.setRedemptionTimes(voucherRequestDTO.getRedemptionTimes());
+        }
         return voucherDb;
     }
 
