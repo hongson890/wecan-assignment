@@ -182,6 +182,10 @@ mvn spring:boot-run
 
 >   Start by docker
 ```
+# Build Docker Image
+docker build -t sonny-wecan-assignment .
+
+# Start by using docker compose
 docker-compose up
 ```
 # Demo
