@@ -5,7 +5,7 @@ In this assignment, I'm going build a Java Spring Boot Application from scratch,
 
 # Features
 
-- Proive management interface, which enables the operators to setup a set of vouchers with various
+- Provide management interface, which enables the operators to setup a set of vouchers with various
   features
 - Support 4 types of redemption: Single redemption, Multiple redemption, X times redemption, before a certain point of time redemption
 - Provide redemption interface, which enables the client redeem a single voucher
