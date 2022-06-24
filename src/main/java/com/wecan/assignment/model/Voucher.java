@@ -51,12 +51,6 @@ public class Voucher {
     // The total number of times the voucher has been redeemed
     private Integer redemptionTimes;
 
-    // The status of a voucher and status = false if there it is fell into 3 cases:
-    // - redemptionType = SINGLE and it has been used
-    // - redemptionType = X_TIMES and it has been redeemed more than number of its value
-    // - redemptionType = BEFORE_CERTAIN_POINT_OF_TIME and it has been expired
-    private boolean status;
-
     // Used to enable or disable a voucher regardless of the voucher status being available or not
     // Note: only active vouchers can be redeemed
     private boolean active;

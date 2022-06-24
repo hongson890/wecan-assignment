@@ -3,7 +3,6 @@ package com.wecan.assignment.services.impl;
 import com.wecan.assignment.controllers.dto.VoucherDTO;
 import com.wecan.assignment.controllers.dto.VoucherRequestDTO;
 import com.wecan.assignment.exception.VoucherBadParamsException;
-import com.wecan.assignment.exception.VoucherExistedException;
 import com.wecan.assignment.exception.VoucherNotfoundException;
 import com.wecan.assignment.mapper.VoucherMapper;
 import com.wecan.assignment.model.Voucher;
@@ -29,20 +28,18 @@ public class VoucherServiceImpl implements VoucherService {
 
     private VoucherRepository voucherRepository;
 
-    private VoucherMapper voucherMapper;
+    public VoucherServiceImpl(VoucherRepository voucherRepository) {
+        this.voucherRepository = voucherRepository;
+    }
 
     @Autowired
-    public VoucherServiceImpl(VoucherRepository voucherRepository, VoucherMapper voucherMapper) {
-        this.voucherRepository = voucherRepository;
-        this.voucherMapper = voucherMapper;
-    }
 
     @Override
     public List<VoucherDTO> getAllVouchers() {
         logger.info("getAllVouchers");
         return voucherRepository.findAll()
                 .stream()
-                .map(voucher -> voucherMapper.toDTO(voucher))
+                .map(voucher -> VoucherMapper.toDTO(voucher))
                 .collect(Collectors.toList());
     }
 
@@ -50,11 +47,11 @@ public class VoucherServiceImpl implements VoucherService {
     public ResponseEntity createVoucher(final VoucherRequestDTO voucherRequestDTO) {
         logger.info("createVoucher: {}", voucherRequestDTO);
         try {
-            Voucher voucher = voucherMapper.toEntity(voucherRequestDTO);
+            Voucher voucher = VoucherMapper.toEntity(voucherRequestDTO);
             voucher.setCreatedOn(LocalDateTime.now());
             voucher.setUpdatedOn(LocalDateTime.now());
             Voucher v = voucherRepository.save(voucher);
-            return ResponseEntity.ok(voucherMapper.toDTO(v));
+            return ResponseEntity.ok(VoucherMapper.toDTO(v));
         } catch (DataIntegrityViolationException e) {
             logger.error("", e);
             throw new VoucherBadParamsException(voucherRequestDTO);
@@ -71,9 +68,9 @@ public class VoucherServiceImpl implements VoucherService {
         try {
             Voucher voucherDb = voucherRepository.getById(id);
             voucherDb.setUpdatedOn(LocalDateTime.now());
-            voucherDb = voucherMapper.toEntity(voucherDb, voucherRequestDTO);
+            voucherDb = VoucherMapper.toEntity(voucherDb, voucherRequestDTO);
             voucherRepository.save(voucherDb);
-            return ResponseEntity.ok(voucherMapper.toDTO(voucherDb));
+            return ResponseEntity.ok(VoucherMapper.toDTO(voucherDb));
         } catch (DataIntegrityViolationException e) {
             logger.error("", e);
             throw new VoucherBadParamsException(voucherRequestDTO);
@@ -106,7 +103,8 @@ public class VoucherServiceImpl implements VoucherService {
             if (voucherDb == null) {
                 throw new VoucherNotfoundException(id.toString());
             } else {
-                return voucherMapper.toDTO(voucherDb);
+                VoucherDTO v = VoucherMapper.toDTO(voucherDb);
+                return v;
             }
         } catch (EntityNotFoundException e) {
             logger.error("", e);
