@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.wecan.assignment</groupId>
-	<artifactId>assignment</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>sonny-wecan-assignment</artifactId>
+	<version>1.0</version>
 	<name>assignment</name>
 	<description>Wecan Voucher Assignment</description>
 	<properties>
