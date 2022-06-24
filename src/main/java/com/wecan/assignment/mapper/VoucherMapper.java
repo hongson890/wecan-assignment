@@ -3,21 +3,26 @@ package com.wecan.assignment.mapper;
 import com.wecan.assignment.controllers.dto.VoucherDTO;
 import com.wecan.assignment.controllers.dto.VoucherRequestDTO;
 import com.wecan.assignment.model.Voucher;
+import com.wecan.assignment.utils.VoucherUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
 public class VoucherMapper {
-    ModelMapper modelMapper = new ModelMapper();
-    public VoucherDTO toDTO(Voucher voucher) {
-        return modelMapper.map(voucher, VoucherDTO.class);
+    public static VoucherDTO toDTO(Voucher voucher) {
+        ModelMapper modelMapper = new ModelMapper();
+        VoucherDTO voucherDTO = modelMapper.map(voucher, VoucherDTO.class);
+        voucherDTO.setAvailability(VoucherUtil.isVoucherAvailability
+                (voucher.getRedemptionType(), voucher.getRedemptionValue(), voucher.getRedemptionTimes()));
+        return voucherDTO;
     }
 
-    public Voucher toEntity(VoucherRequestDTO voucherRequestDTO) {
+    public static Voucher toEntity(VoucherRequestDTO voucherRequestDTO) {
+        ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(voucherRequestDTO, Voucher.class);
     }
 
-    public Voucher toEntity(Voucher voucherDb, VoucherRequestDTO voucherRequestDTO) {
+    public static Voucher toEntity(Voucher voucherDb, VoucherRequestDTO voucherRequestDTO) {
         voucherDb.setActive(voucherRequestDTO.isActive());
         voucherDb.setVoucherType(voucherRequestDTO.getVoucherType());
         voucherDb.setRedemptionType(voucherRequestDTO.getRedemptionType());
